@@ -16,12 +16,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: sbt test
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check for scalafmt conformance
-        uses: openlawteam/scalafmt-ci@v2
-        with:
-          args: "--exclude=third_party --list"
+        run: sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck test
