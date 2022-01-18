@@ -1,0 +1,29 @@
+name: Scala CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: sbt test
+  scalafmt-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Checking your code to see if u r naughty or nice
+        uses: openlawteam/scalafmt-ci@v2
+        with:
+          args: "--exclude=third_party --list"
